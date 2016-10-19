@@ -1,8 +1,9 @@
 #include "settingswindow.h"
 #include "ui_settingswindow.h"
 
-SettingsWindow::SettingsWindow(QWidget *parent) :
+SettingsWindow::SettingsWindow(BitmapModel bitmapModel,QWidget *parent) :
     QDialog(parent),
+    bitmapModel(bitmapModel),
     ui(new Ui::SettingsWindow)
 {
     ui->setupUi(this);

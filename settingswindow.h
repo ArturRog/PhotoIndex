@@ -2,7 +2,7 @@
 #define SETTINGSWINDOW_H
 
 #include <QDialog>
-
+#include "bitmapmodel.h"
 namespace Ui {
 class SettingsWindow;
 }
@@ -12,7 +12,7 @@ class SettingsWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit SettingsWindow(QWidget *parent = 0);
+    explicit SettingsWindow(BitmapModel bitmapModel,QWidget *parent = 0);
     ~SettingsWindow();
 
 private slots:
@@ -21,6 +21,8 @@ private slots:
     void on_pushButton_clicked();
 
 private:
+    BitmapModel bitmapModel;
+
     Ui::SettingsWindow *ui;
 };
 
