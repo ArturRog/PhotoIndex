@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "bitmapmodel.h"
+#include "settingswindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,11 +19,15 @@ public:
 
 private slots:
 
+
     void on_directoryButton_clicked();
 
     void on_settingsButton_clicked();
 
 private:
+    BitmapModel bitmapModel;
+    SettingsWindow settingsWindow;
+
     Ui::MainWindow *ui;
 };
 

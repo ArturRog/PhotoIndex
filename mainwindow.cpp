@@ -6,8 +6,11 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
+    bitmapModel(800,600,4,5),
+    settingsWindow(bitmapModel),
     ui(new Ui::MainWindow)
 {
+    settingsWindow.setModal(true);
     ui->setupUi(this);
 }
 
@@ -35,7 +38,7 @@ void MainWindow::on_directoryButton_clicked()
 
 void MainWindow::on_settingsButton_clicked()
 {
-    SettingsWindow w;
-    w.setModal(true);
-    w.exec();
+//    SettingsWindow w;
+//    w.setModal(true);
+    settingsWindow.exec();
 }
