@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QFileDialog>
 #include "settingswindow.h"
+#include <QMessageBox>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -22,13 +24,11 @@ void MainWindow::on_directoryButton_clicked()
                                                  QFileDialog::ShowDirsOnly
                                                  | QFileDialog::DontResolveSymlinks);
 
-    QDir directory(dir);
-    QStringList allFilesInDirectory = directory.entryList();
+    QDir selectedDirectory(dir);
+    selectedDirectory.setNameFilters(QStringList() << "*.bmp" << "*.gif" << "*.jpg");
+    QStringList imagesToIndex = selectedDirectory.entryList();
 
-    const QRegExp typeFilter("*.BMP");
-    QStringList images = allFilesInDirectory.filter(typeFilter);
-
-    QMessageBox::information(this,"asd", images.at(0));
+    QMessageBox::information(this,"asd", imagesToIndex.at(0));
 }
 
 
