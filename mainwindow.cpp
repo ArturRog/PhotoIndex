@@ -19,16 +19,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_directoryButton_clicked()
 {
-    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+    QString selectedDirectoryPath = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
                                                  "/home",
                                                  QFileDialog::ShowDirsOnly
                                                  | QFileDialog::DontResolveSymlinks);
 
-    QDir selectedDirectory(dir);
+    QDir selectedDirectory(selectedDirectoryPath);
     selectedDirectory.setNameFilters(QStringList() << "*.bmp" << "*.gif" << "*.jpg");
     QStringList imagesToIndex = selectedDirectory.entryList();
-
-    QMessageBox::information(this,"asd", imagesToIndex.at(0));
 }
 
 
