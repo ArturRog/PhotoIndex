@@ -21,7 +21,16 @@ void MainWindow::on_directoryButton_clicked()
                                                  "/home",
                                                  QFileDialog::ShowDirsOnly
                                                  | QFileDialog::DontResolveSymlinks);
+
+    QDir directory(dir);
+    QStringList allFilesInDirectory = directory.entryList();
+
+    const QRegExp typeFilter("*.BMP");
+    QStringList images = allFilesInDirectory.filter(typeFilter);
+
+    QMessageBox::information(this,"asd", images.at(0));
 }
+
 
 void MainWindow::on_settingsButton_clicked()
 {
