@@ -5,6 +5,7 @@
 #include "bitmapmodel.h"
 #include "settingswindow.h"
 
+
 namespace Ui {
 class MainWindow;
 }
@@ -27,6 +28,9 @@ private slots:
 private:
     BitmapModel bitmapModel;
     SettingsWindow settingsWindow;
+    QStringList listOfImagesNames;
+    QStringList listOfImagesPaths;
+    QList<QImage> listOfImages;
 
     Ui::MainWindow *ui;
 };

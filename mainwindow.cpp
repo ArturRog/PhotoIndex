@@ -3,6 +3,8 @@
 #include <QFileDialog>
 #include "settingswindow.h"
 #include <QMessageBox>
+#include <iostream>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,6 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     settingsWindow.setModal(true);
     ui->setupUi(this);
+
+    //listOfImagesNames.append();
+    //listOfImagesPaths.append();
 }
 
 MainWindow::~MainWindow()
@@ -30,7 +35,15 @@ void MainWindow::on_directoryButton_clicked()
 
     QDir selectedDirectory(selectedDirectoryPath);
     selectedDirectory.setNameFilters(QStringList() << "*.bmp" << "*.gif" << "*.jpg");
-    QStringList imagesToIndex = selectedDirectory.entryList();
+   // bitmapModel.
+    listOfImagesNames =  selectedDirectory.entryList();
+    for(QString imagesNames : listOfImagesNames) {
+        QString path = selectedDirectoryPath+"/"+imagesNames;
+        listOfImagesPaths.append(path);
+        listOfImages.append(QImage(path));
+    }
+
+    std::cout << "asd";
 }
 
 void MainWindow::on_settingsButton_clicked()
