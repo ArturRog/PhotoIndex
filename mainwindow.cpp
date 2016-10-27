@@ -37,7 +37,8 @@ void MainWindow::on_directoryButton_clicked()
     selectedDirectory.setNameFilters(QStringList() << "*.bmp" << "*.gif" << "*.jpg");
    // bitmapModel.
     listOfImagesNames =  selectedDirectory.entryList();
-    for(QString imagesNames : listOfImagesNames) {
+    for(QString imagesNames : listOfImagesNames)
+    {
         QString path = selectedDirectoryPath+"/"+imagesNames;
         listOfImagesPaths.append(path);
         listOfImages.append(QImage(path));
@@ -51,4 +52,24 @@ void MainWindow::on_settingsButton_clicked()
 //    SettingsWindow w;
 //    w.setModal(true);
     settingsWindow.exec();
+}
+
+void  MainWindow::resizeImages()
+{
+    for(QImage image : listOfImages)
+    {
+        image = image.scaled(bitmapModel.getImageWidth(), bitmapModel.getImageHeight());
+    }
+    std::cout << "a";
+}
+
+void  MainWindow::drawBitmap()
+{
+
+}
+
+void MainWindow::on_generateButton_clicked()
+{
+    resizeImages();
+    drawBitmap();
 }

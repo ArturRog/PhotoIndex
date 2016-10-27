@@ -25,6 +25,8 @@ private slots:
 
     void on_settingsButton_clicked();
 
+    void on_generateButton_clicked();
+
 private:
     BitmapModel bitmapModel;
     SettingsWindow settingsWindow;
@@ -33,6 +35,10 @@ private:
     QList<QImage> listOfImages;
 
     Ui::MainWindow *ui;
+
+    void resizeImages();
+    void drawBitmap();
+
 };
 
 #endif // MAINWINDOW_H
