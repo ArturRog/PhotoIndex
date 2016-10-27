@@ -3,6 +3,8 @@
 #include <QFileDialog>
 #include "settingswindow.h"
 #include <QMessageBox>
+#include <QPixmap>
+#include <QGraphicsPixmapItem>
 #include <iostream>
 
 
@@ -70,6 +72,11 @@ void  MainWindow::resizeImages()
 void  MainWindow::drawBitmap()
 {
 
+    QGraphicsScene* scene = new QGraphicsScene();
+    QGraphicsView* view = new QGraphicsView(scene);
+    QGraphicsPixmapItem* item = new QGraphicsPixmapItem(QPixmap::fromImage(listOfImages.at(1)));
+    scene->addItem(item);
+    ui->graphicsView->setScene(scene);
 }
 
 void MainWindow::on_generateButton_clicked()
