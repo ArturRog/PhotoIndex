@@ -20,7 +20,14 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_textEdit_3_textChanged();
+
+    void on_textEdit_5_textChanged();
+
 private:
+
+    void show_number_of_icons();
+
     BitmapModel bitmapModel;
 
     Ui::SettingsWindow *ui;

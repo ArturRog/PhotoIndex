@@ -20,6 +20,7 @@ private:
     int column;
     int icons_num;
     std::string comment;
+
 };
 
 #endif // BITMAPMODEL_H

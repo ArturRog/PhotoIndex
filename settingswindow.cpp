@@ -21,10 +21,28 @@ void SettingsWindow::on_pushButton_2_clicked()
 
 void SettingsWindow::on_pushButton_clicked()
 {
-    QString width = ui->textEdit->toPlainText();
-    QString height = ui->textEdit_2->toPlainText();
-    QString icons_num = ui->textEdit_3->toPlainText();
-//    QString comment = ui->textEdit_4->toPlainText();
 
-    ui->textEdit_4->setText(width + height + icons_num);
+    bitmapModel.setWidth(ui->textEdit->toPlainText().toInt());
+    bitmapModel.setHeight(ui->textEdit_2->toPlainText().toInt());
+    bitmapModel.setColumn(ui->textEdit_3->toPlainText().toInt());
+    bitmapModel.setRow(ui->textEdit_5->toPlainText().toInt());
+    bitmapModel.setComment(ui->textEdit_4->toPlainText().toStdString());
+
+}
+
+void SettingsWindow::show_number_of_icons(){
+    int columns = ui->textEdit_3->toPlainText().toInt();
+    int rows = ui->textEdit_5->toPlainText().toInt();
+    int iconsNumber = columns*rows;
+    ui->label_7->setText(QString::number(iconsNumber));
+}
+
+void SettingsWindow::on_textEdit_3_textChanged()
+{
+    show_number_of_icons();
+}
+
+void SettingsWindow::on_textEdit_5_textChanged()
+{
+    show_number_of_icons();
 }
