@@ -46,6 +46,5 @@ private:
     std::string comment;
     int imageWidth;
     int imageHeight;
-};
 
 #endif // BITMAPMODEL_H
