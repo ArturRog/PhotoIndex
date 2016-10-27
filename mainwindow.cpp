@@ -73,10 +73,22 @@ void  MainWindow::drawBitmap()
 {
 
     QGraphicsScene* scene = new QGraphicsScene();
-    QGraphicsView* view = new QGraphicsView(scene);
-    QGraphicsPixmapItem* item = new QGraphicsPixmapItem(QPixmap::fromImage(listOfImages.at(1)));
-    scene->addItem(item);
+    QGraphicsView* view = new QGraphicsView(scene, this);
     ui->graphicsView->setScene(scene);
+    QGraphicsPixmapItem* item = new QGraphicsPixmapItem(QPixmap::fromImage(listOfImages.at(1)));
+    QGraphicsPixmapItem* item2 = new QGraphicsPixmapItem(QPixmap::fromImage(listOfImages.at(1)));
+    //rectangle = scene->addRect(10,10,bitmapModel.getImageWidth(), bitmapModel.getHeight());
+    //rectangle->
+    scene->addItem(item);
+    scene->addItem(item2);
+
+    QString fileName= QFileDialog::getSaveFileName(this, "Save image", QCoreApplication::applicationDirPath(), "BMP Files (*.bmp);;JPEG (*.JPEG);;PNG (*.png)" );
+        if (!fileName.isNull())
+        {
+            QPixmap pixMap = this->ui->graphicsView->grab();
+            pixMap.save(fileName);
+        }
+//http://stackoverflow.com/questions/21987818/show-two-images-in-one-qgraphicsview
 }
 
 void MainWindow::on_generateButton_clicked()

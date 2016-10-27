@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "bitmapmodel.h"
 #include "settingswindow.h"
+#include <QGraphicsRectItem>
 
 
 namespace Ui {
@@ -33,7 +34,7 @@ private:
     QStringList listOfImagesNames;
     QStringList listOfImagesPaths;
     QList<QImage> listOfImages;
-
+    QGraphicsRectItem *rectangle;
     Ui::MainWindow *ui;
 
     void resizeImages();
