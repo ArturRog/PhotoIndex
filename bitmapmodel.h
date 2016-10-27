@@ -12,8 +12,8 @@ public:
     BitmapModel(int width, int height, int row, int column)
         : width(width), height(height), row(row), column(column), icons_num(row*column)
     {
-        imageWidth = 0.8*width-(column-1)*0.03*width;
-        imageHeight = 0.8*height-(row-1)*0.03*height;
+        imageWidth = (0.8*width-(column-1)*0.03*width)/5;
+        imageHeight = (0.8*height-(row-1)*0.03*height)/5;
     }
 
     int getImageWidth() const;

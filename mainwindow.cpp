@@ -56,10 +56,14 @@ void MainWindow::on_settingsButton_clicked()
 
 void  MainWindow::resizeImages()
 {
-    for(QImage image : listOfImages)
+    QList<QImage> temp;
+    for(QImage img : listOfImages)
     {
-        image = image.scaled(bitmapModel.getImageWidth(), bitmapModel.getImageHeight());
+        QImage tempImage = img.scaled(bitmapModel.getImageWidth(), bitmapModel.getImageHeight());
+        temp.append(tempImage);
     }
+    listOfImages.clear();
+    listOfImages = temp;
     std::cout << "a";
 }
 
