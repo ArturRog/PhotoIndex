@@ -27,7 +27,7 @@ void SettingsWindow::on_pushButton_clicked()
     bitmapModel.setColumn(ui->textEdit_3->toPlainText().toInt());
     bitmapModel.setRow(ui->textEdit_5->toPlainText().toInt());
     bitmapModel.setComment(ui->textEdit_4->toPlainText().toStdString());
-
+    this->close();
 }
 
 void SettingsWindow::show_number_of_icons(){
@@ -45,4 +45,8 @@ void SettingsWindow::on_textEdit_3_textChanged()
 void SettingsWindow::on_textEdit_5_textChanged()
 {
     show_number_of_icons();
+}
+
+BitmapModel SettingsWindow::getBitMmapModel() {
+    return bitmapModel;
 }

@@ -15,6 +15,7 @@ class SettingsWindow : public QDialog
 public:
     explicit SettingsWindow(BitmapModel bitmapModel,QWidget *parent = 0);
     ~SettingsWindow();
+    BitmapModel getBitMmapModel();
 
 private slots:
     void on_pushButton_2_clicked();

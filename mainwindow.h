@@ -28,6 +28,10 @@ private slots:
 
     void on_generateButton_clicked();
 
+    void on_saveButton_clicked();
+
+    void on_spinBox_valueChanged(int arg1);
+
 private:
     BitmapModel bitmapModel;
     SettingsWindow settingsWindow;
@@ -36,9 +40,13 @@ private:
     QList<QImage> listOfImages;
     QGraphicsRectItem *rectangle;
     Ui::MainWindow *ui;
+    QString selectedDirectoryPath;
+    QList<QGraphicsScene*> scenes;
 
     void resizeImages();
-    void drawBitmap();
+    void drawBitmap(QGraphicsScene* scene);
+    void sortNamesList();
+    void prepareBitmap(QGraphicsScene* scene, int count);
 
 };
 
