@@ -5,8 +5,6 @@ BitmapModel::BitmapModel()
 
 }
 
-
-
 int BitmapModel::getImageWidth() const
 {
     return imageHeight;

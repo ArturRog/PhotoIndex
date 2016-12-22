@@ -39,7 +39,6 @@ void MainWindow::on_directoryButton_clicked()
 
     QDir selectedDirectory(selectedDirectoryPath);
     selectedDirectory.setNameFilters(QStringList() << "*.bmp" << "*.gif" << "*.jpg");
-   // bitmapModel.
     listOfImagesNames =  selectedDirectory.entryList();
     for(QString imagesNames : listOfImagesNames)
     {
@@ -62,9 +61,8 @@ void MainWindow::on_settingsButton_clicked()
 void  MainWindow::resizeImages()
 {
     QList<QImage> temp;
-    for(QImage img : listOfImages)
-    {
-        QImage tempImage = img.scaled(bitmapModel.getImageWidth(), bitmapModel.getImageHeight());
+    for(QImage img : listOfImages) {
+        QImage tempImage = img.scaled(bitmapModel.getImageHeight(), bitmapModel.getImageWidth());
         temp.append(tempImage);
     }
     listOfImages.clear();
@@ -81,12 +79,12 @@ void  MainWindow::prepareBitmap(QGraphicsScene* scene, int count)
 {
   //Directory Name
     QGraphicsTextItem *dirName = scene->addText(selectedDirectoryPath);
-    QFont dirNameFont;
-    dirNameFont.setPointSize(11);
-    dirNameFont.setBold(true);
+    QFont dirNameAndPageNumberFont;
+    dirNameAndPageNumberFont.setPointSize(10);
+    dirNameAndPageNumberFont.setBold(true);
 
-    dirName->setFont(dirNameFont);
-    dirName->moveBy(400 - 5 * selectedDirectoryPath.length(), 0);
+    dirName->setFont(dirNameAndPageNumberFont);
+    dirName->moveBy(400 - 4 * selectedDirectoryPath.length(), -10);
 
   //Page Number
     QString pageNumber;
@@ -94,22 +92,19 @@ void  MainWindow::prepareBitmap(QGraphicsScene* scene, int count)
     pageNumber += std::to_string(count).c_str();
 
     QGraphicsTextItem *pNumber = scene->addText(pageNumber);
-    QFont pageNumberFont;
-    pageNumberFont.setPointSize(11);
-    pageNumberFont.setBold(true);
-
-    pNumber->setFont(pageNumberFont);
-    pNumber->moveBy(400 - 5 * pageNumber.length() , 0);
+    pNumber->setFont(dirNameAndPageNumberFont);
+    pNumber->moveBy(400 - 4.5 * pageNumber.length() , -5);
 
    //Comment
     QString comm;
     comm += settingsWindow.getBitMmapModel().getComment().c_str();
     QGraphicsTextItem *comment = scene->addText(comm);
-    comment->moveBy(400- 5 * comm.length(), 550);
-//
+    comment->setTextWidth(750);
+    comment->moveBy(25, 580);
+
    //Bitmap
     int dx = 25, dy = 40;
-    int tdx = 50, tdy = 170;
+    int tdx = 25, tdy = 140;
     int counter = 0;
     QList<QString>::const_iterator nameIter = listOfImagesNames.cbegin() + count * 20;
     QList<QImage>::const_iterator it = listOfImages.cbegin();
@@ -120,13 +115,13 @@ void  MainWindow::prepareBitmap(QGraphicsScene* scene, int count)
         QPixmap image(QPixmap::fromImage(*it));
         QGraphicsPixmapItem *imageItem = scene->addPixmap(image);
         QString imageName = *nameIter;
-        if(nameIter->length() > 10) {
+        if(nameIter->length() > 23) {
             QString temp = "~";
             temp += imageName;
-            imageName = temp.mid(0, 6);
+            imageName = temp.mid(0, 23);
         }
         QGraphicsTextItem *text = scene->addText(imageName);
-        ++nameIter;
+
         ++counter;
 
         if(counter < 6) {
@@ -136,20 +131,25 @@ void  MainWindow::prepareBitmap(QGraphicsScene* scene, int count)
             tdx += 155;
             if(counter == 5) {
                 dx = 25;
-                dy += 160;
-                tdx = 50;
-                tdy += 160;
+                dy += 140;
+                tdx = 25;
+                tdy += 140;
                 counter = 0;
             }
         }
+        ++nameIter;
         ++it;
+
+
         ++loopCounter;
-    } while (loopCounter == 20 || it != listOfImages.cend());
+    } while ( loopCounter < 20 && it != listOfImages.cend());
 
-    // C:\Users\jakubs\Desktop\PGK\Projekt\ZdjeciuszkaTestowe
+    /* LINK DO TESTOW
+
+        C:\Users\jakubs\Desktop\PGK\Projekt\ZdjeciuszkaTestowe
+
+    */
 }
-
-
 
 void MainWindow::on_generateButton_clicked()
 {
@@ -164,7 +164,6 @@ void MainWindow::on_generateButton_clicked()
 
     drawBitmap(scenes.first());
 }
-
 
 void  MainWindow::sortNamesList()
 {
