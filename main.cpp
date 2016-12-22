@@ -6,7 +6,6 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-//    BitmapModel bitmap = new BitmapModel();
     MainWindow w;
     w.show();
 

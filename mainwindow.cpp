@@ -14,7 +14,7 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    bitmapModel(800,600,4,5),
+    bitmapModel(800,600),
     settingsWindow(bitmapModel),
     ui(new Ui::MainWindow)
 {
@@ -42,7 +42,7 @@ void MainWindow::on_directoryButton_clicked()
     listOfImagesNames =  selectedDirectory.entryList();
     for(QString imagesNames : listOfImagesNames)
     {
-        QString path = selectedDirectoryPath+"/"+imagesNames;
+        QString path = selectedDirectoryPath + "/" + imagesNames;
         listOfImagesPaths.append(path);
         listOfImages.append(QImage(path));
     }
@@ -143,12 +143,6 @@ void  MainWindow::prepareBitmap(QGraphicsScene* scene, int count)
 
         ++loopCounter;
     } while ( loopCounter < 20 && it != listOfImages.cend());
-
-    /* LINK DO TESTOW
-
-        C:\Users\jakubs\Desktop\PGK\Projekt\ZdjeciuszkaTestowe
-
-    */
 }
 
 void MainWindow::on_generateButton_clicked()

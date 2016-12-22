@@ -25,20 +25,6 @@ void SettingsWindow::on_pushButton_clicked()
     this->close();
 }
 
-void SettingsWindow::show_number_of_icons(){
-
-}
-
-void SettingsWindow::on_textEdit_3_textChanged()
-{
-    show_number_of_icons();
-}
-
-void SettingsWindow::on_textEdit_5_textChanged()
-{
-    show_number_of_icons();
-}
-
 BitmapModel SettingsWindow::getBitMmapModel() {
     return bitmapModel;
 }
