@@ -147,16 +147,23 @@ void  MainWindow::prepareBitmap(QGraphicsScene* scene, int count)
 
 void MainWindow::on_generateButton_clicked()
 {
-    int max = std::ceil(listOfImages.size() / 20) + 1;
-    int counter = 1;
-    do {
-        QGraphicsScene* scene = new QGraphicsScene(QRect(QPoint(0,0), QPoint(800,600)));
-        scenes.append(scene);
-        prepareBitmap(scene, counter - 1);
-        ++counter;
-    } while( counter == max );
 
-    drawBitmap(scenes.first());
+    if (listOfImages.size() == 0){
+        MainWindow::on_directoryButton_clicked();
+    }
+    else{
+        int max = std::ceil(listOfImages.size() / 20) + 1;
+        int counter = 1;
+        do {
+            QGraphicsScene* scene = new QGraphicsScene(QRect(QPoint(0,0), QPoint(800,600)));
+            scenes.append(scene);
+            prepareBitmap(scene, counter - 1);
+            ++counter;
+        } while( counter == max );
+
+        drawBitmap(scenes.first());
+    }
+
 }
 
 void  MainWindow::sortNamesList()
@@ -166,26 +173,38 @@ void  MainWindow::sortNamesList()
 
 void MainWindow::on_saveButton_clicked()
 {
-    QString fileName= QFileDialog::getSaveFileName(this, "Save image", QCoreApplication::applicationDirPath(), "BMP Files (*.bmp);;JPEG (*.JPEG);;PNG (*.png)" );
-        if (!fileName.isNull()) {
-            QPixmap pixMap = this->ui->graphicsView->grab();
-            pixMap.save(fileName);
+    if (listOfImages.size() == 0){
+        MainWindow::on_directoryButton_clicked();
+
+    }
+    else{
+        QString fileName= QFileDialog::getSaveFileName(this, "Save image", QCoreApplication::applicationDirPath(), "BMP Files (*.bmp);;JPEG (*.JPEG);;PNG (*.png)" );
+            if (!fileName.isNull()) {
+                QPixmap pixMap = this->ui->graphicsView->grab();
+                pixMap.save(fileName);
+            }
+
+        QPrinter printer;
+        QPrintDialog *dlg = new QPrintDialog(&printer,0);
+        if(dlg->exec() == QDialog::Accepted) {
+               QImage img(fileName);
+               QPainter painter(&printer);
+               painter.drawImage(QPoint(0,0),img);
+               painter.end();
         }
 
-    QPrinter printer;
-    QPrintDialog *dlg = new QPrintDialog(&printer,0);
-    if(dlg->exec() == QDialog::Accepted) {
-           QImage img(fileName);
-           QPainter painter(&printer);
-           painter.drawImage(QPoint(0,0),img);
-           painter.end();
+        delete dlg;
     }
-
-    delete dlg;
 }
 
 void MainWindow::on_spinBox_valueChanged(int arg1)
 {
-    drawBitmap(scenes.at(arg1));
+    if (listOfImages.size() == 0){
+        MainWindow::on_directoryButton_clicked();
 
+    }
+    else if (arg1 >= scenes.length()){
+        MainWindow::on_spinBox_valueChanged(arg1-1);
+    }
+    else drawBitmap(scenes.at(arg1));
 }
